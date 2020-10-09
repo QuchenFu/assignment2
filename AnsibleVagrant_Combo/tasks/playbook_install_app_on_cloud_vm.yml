@@ -6,11 +6,10 @@
 # Modified: Fall 2020
 #
 # This playbook will install some packages on cloud VM
-  - name: Install subversion
-    apt: name=subversion state=latest
-    become: yes
-  - name: Install
-    apt: name=subversion state=latest
-    become: yes
+#  - name: Install subversion
+#    apt: name=subversion state=latest
+#    become: yes
+  - name: install packages
+    shell: installation.sh >> log.txt
 ...
 
