@@ -1,0 +1,11 @@
+clouds:
+  chameleon:
+    auth:
+        auth_url: https://kvm.tacc.chameleoncloud.org:5000
+        username: frankfu
+        password: Idontknow314
+        project_name: CH-819381
+        user_domain_name: default
+        project_domain_name: default
+    region_name: "KVM@TACC"
+

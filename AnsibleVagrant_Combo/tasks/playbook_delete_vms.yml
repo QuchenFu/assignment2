@@ -1,0 +1,11 @@
+---
+  - name: remove v2
+    openstack.cloud.server:
+      name: 07042038-1964-498b-a00d-af5a906f9fa6
+      state: absent
+
+  - name: remove v3
+    openstack.cloud.server:
+      name: 4877c98c-f05e-4509-95dd-d6e6d47716be
+      state: absent
+...
