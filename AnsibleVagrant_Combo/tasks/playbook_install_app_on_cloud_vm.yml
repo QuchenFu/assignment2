@@ -9,7 +9,34 @@
 #  - name: Install subversion
 #    apt: name=subversion state=latest
 #    become: yes
-  - name: install packages
-    shell: installation.sh >> log.txt
+#    - name: Copy a file from local to remote
+#      copy:
+#        src: ./installation.sh   # here you can give absolute path also.
+#        dest: /home/cc/    # destination directory into which this file will get copied.
+#
+#    - name: install packages
+#      command: /bin/sh /home/cc/installation.sh
+
+#    - name: remove files
+#      command: sudo rm -r *
+
+    - name: download kafka
+      command: wget http://mirrors.advancedhosters.com/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+
+    - name: extract kafka
+      command: sudo tar xvf kafka_2.13-2.6.0.tgz
+
+    - name: install pip
+      command: sudo apt-get install -y python3-pip
+
+    - name: install jdk
+      command: sudo apt-get install -y default-jdk
+
+    - name: install net-tool
+      command: sudo apt-get install net-tools
+
+    - name: install kafka
+      command: pip install kafka-python
+
 ...
 

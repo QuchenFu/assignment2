@@ -13,4 +13,3 @@ sudo -H pip3 install --upgrade ansible
 sudo -H pip3 install --ignore-installed PyYAML
 sudo python3 -m pip install --upgrade openstacksdk
 ansible-galaxy collection install openstack.cloud
-
