@@ -1,4 +1,74 @@
-In this directory we show how we can combine Vagrant with Ansible.  I reused
-the demo master file from the AnsibleOnly directory. I did not copy the individual
-tasks and playbooks.  But you can do that and try things out.
+# kafka_assignment
 
+Command used:
+
+VboxManage list vms
+
+VboxManage natnetwork add --netname "MyNetWork" --network "192.168.15.0/24" --enable --dhcp on
+
+VboxManage dhcpserver modify --network="MyNetWork" --vm=vm1 --fixed-address=192.168.15.2
+
+VboxManage dhcpserver modify --network="MyNetWork" --vm=vm2 --fixed-address=192.168.15.3
+
+VboxManage hostonlyif ipconfig "vboxnet0" --dhcp
+
+VboxManage list hostonlyifs
+
+VboxManage dhcpserver modify --network="HostInterfaceNetworking-vboxnet0" --vm=vm1 --fixed-address=192.168.56.102
+
+wget http://mirrors.advancedhosters.com/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+
+sudo apt-get install python3-pip
+
+sudo apt-get install default-jdk
+
+sudo apt-get install net-tools
+
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+bin/kafka-server-start.sh config/server.properties
+
+tmux new -s 0
+
+tmux attach -t 0
+
+sudo apt-get install nmap
+
+curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | sudo apt-key add -
+
+echo "deb https://apache.bintray.com/couchdb-deb bionic main" | sudo tee -a /etc/apt/sources.list
+
+sudo apt update
+
+sudo apt install couchdb
+
+
+I wrote the consumer.py and tested on AWS, Bashar wrote the teo producer.py and tested on Chameleon.
+
+
+
+Learning curve:
+
+1. problem: code can't run in backgroud.
+   solution: tmux new -s 0
+
+2. problem: EC2 don't have static IP, need to configure server.properties everytime
+   solution: create elastic IP
+
+3. problem: It is dangerous to open 9092, 2181 port to the outside word.
+   solution: create security group and only allow certain IP to access
+
+4. problem: Kafka server can't start
+   solution: set listeners to internal IP and advertised-listeners to external IP
+
+5. problem: Can't connect to local couchdb
+   solution: specify username and password when make connection
+
+6. problem: Can't write to local couchdb
+   solution: the data have to be in application/json format
+
+7. problem: kafka producer starter code give error
+   solution: need to import kafka-python not kafka
+
+8. problem: confused about vm2/vm3
+   solution: name the instance in EC2 properly
