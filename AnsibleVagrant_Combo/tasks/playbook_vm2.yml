@@ -4,6 +4,9 @@
         src: vm2/server.properties  # here you can give absolute path also.
         dest: kafka_2.13-2.6.0/config/
 
+    - name: open ports
+      shell: sudo ufw limit 2181; sudo ufw limit 9092; sudo ufw limit 5984
+
     - name: run zookeeper
       shell: sudo nohup kafka_2.13-2.6.0/bin/zookeeper-server-start.sh kafka_2.13-2.6.0/config/zookeeper.properties &
 

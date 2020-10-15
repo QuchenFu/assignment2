@@ -22,11 +22,11 @@ from kafka import KafkaConsumer  # consumer of events
 
 # acquire the consumer
 # (you will need to change this to your bootstrap server's IP addr)
-consumer= KafkaConsumer (bootstrap_servers="129.114.26.223:9092")
+consumer= KafkaConsumer(bootstrap_servers="129.114.27.112:9092")
 couch = couchdb.Server('http://admin:19961009@localhost:5984')
 
 # subscribe to topic
-consumer.subscribe (topics=["utilizations1","utilizations2"])
+consumer.subscribe(topics=["utilizations1","utilizations2"])
 
 try:
     db = couch['db']
@@ -67,8 +67,8 @@ for msg in consumer:
 # we are done. As such, we are not going to get here as the above loop
 # is a forever loop.
 consumer.close ()
-try:
-    del couch['db']
-except:
-    pass
+# try:
+#     del couch['db']
+# except:
+#     pass
 

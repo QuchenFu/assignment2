@@ -36,7 +36,10 @@
       command: sudo apt-get install net-tools
 
     - name: install kafka
-      command: pip install kafka-python
+      command: pip3 install kafka-python
+
+    - name: install kafka
+      command: pip3 install CouchDB
 
 ...
 

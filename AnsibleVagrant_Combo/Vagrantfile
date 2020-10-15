@@ -97,6 +97,7 @@ Vagrant.configure("2") do |config|
   # Note that I am on Windows m/c and so have used the Windows path to
   # the source. I created an equivalent directory structure on my Windows
   # file system as Linux with .ssh, etc directories.
+
   config.vm.provision "file", source: "/Users/quchenfu/Desktop/Chameleon_key.pem", destination: "~/.ssh/"
 
   # let's also copy our ansible.cfg, MyInventory and cloud.yaml file

@@ -10,9 +10,42 @@
         src: vm3/consumer.py  # here you can give absolute path also.
         dest: consumer.py
 
+    - name: add couchdb key
+      shell: curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | sudo apt-key add -
+
+    - name: add couchdb list
+      shell: echo "deb https://apache.bintray.com/couchdb-deb bionic main" | sudo tee -a /etc/apt/sources.list
+
+    - name: update apt
+      shell: sudo apt update
+
+    - name: install couchdb
+      shell: sudo apt install -y couchdb
+
+    - name: Install the couchDB
+      become: yes
+      shell: |
+        COUCHDB_PASSWORD={{ couchdb_admin_password }}
+        echo "couchdb couchdb/mode select clustered
+        couchdb couchdb/mode seen true
+        couchdb couchdb/nodename string {{ couchdb_node_name }}
+        couchdb couchdb/nodename seen true
+        couchdb couchdb/cookie string elmo
+        couchdb couchdb/cookie seen true
+        couchdb couchdb/bindaddress string 0.0.0.0
+        couchdb couchdb/bindaddress seen true
+        couchdb couchdb/adminpass password 19961009
+        couchdb couchdb/adminpass seen true
+        couchdb couchdb/adminpass_again password ${COUCHDB_PASSWORD}
+        couchdb couchdb/adminpass_again seen true" | sudo debconf-set-selections
+        DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes couchdb
+
+    - name: open ports
+      shell: sudo ufw limit 2181; sudo ufw limit 9092; sudo ufw limit 5984
+
     - name: run kafka
       shell: sudo nohup kafka_2.13-2.6.0/bin/kafka-server-start.sh kafka_2.13-2.6.0/config/server.properties &
 
-
-
+    - name: run consumer
+      shell: python3 consumer.py
 ...

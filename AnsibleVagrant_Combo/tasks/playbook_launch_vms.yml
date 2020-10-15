@@ -12,7 +12,7 @@
       network: 4b484898-92b4-4a4b-9c5d-7d55bd72f1ee
       security_groups: 7e09e9fd-4971-49bb-bd55-9aa2fa149b16
       floating_ips:
-        - 129.114.26.223
+        - 129.114.27.112
 
   - name: launch vm3
     openstack.cloud.server:

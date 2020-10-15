@@ -4,35 +4,35 @@
 #  tasks:
 #  - import_tasks: tasks/playbook_launch_vms.yml
 
-- name: "Play 3: Master file performing several actions on cloud VMs"
-  hosts: MyChameleonVMs       # specified in the MyInventory file
-  remote_user:  cc       # change this user to what it is for the cloud
-  strategy: debug        # start a debugger on error
-  become: yes               # run as sudo
-  collections:               # import the plugin
-  - openstack.cloud
-  tasks:
-  - import_tasks: tasks/playbook_install_app_on_cloud_vm.yml
-
-- name: "Play 3: Master file performing several actions on cloud VMs"
-  hosts: VM2       # specified in the MyInventory file
-  remote_user:  cc       # change this user to what it is for the cloud
-  strategy: debug        # start a debugger on error
-  become: yes               # run as sudo
-  collections:               # import the plugin
-  - openstack.cloud
-  tasks:
-  - import_tasks: tasks/playbook_vm2.yml
-
-#- name: "Play 3: Master file performing several actions on cloud VMs"
-#  hosts: VM3       # specified in the MyInventory file
+#- name: "install packages"
+#  hosts: MyChameleonVMs       # specified in the MyInventory file
 #  remote_user:  cc       # change this user to what it is for the cloud
 #  strategy: debug        # start a debugger on error
 #  become: yes               # run as sudo
 #  collections:               # import the plugin
 #  - openstack.cloud
 #  tasks:
-#  - import_tasks: tasks/playbook_vm3.yml
+#  - import_tasks: tasks/playbook_install_app_on_cloud_vm.yml
+#
+#- name: "run zookeeper and broker on vm2"
+#  hosts: VM2       # specified in the MyInventory file
+#  remote_user:  cc       # change this user to what it is for the cloud
+#  strategy: debug        # start a debugger on error
+#  become: yes               # run as sudo
+#  collections:               # import the plugin
+#  - openstack.cloud
+#  tasks:
+#  - import_tasks: tasks/playbook_vm2.yml
+
+- name: "run broker on vm3"
+  hosts: VM3       # specified in the MyInventory file
+  remote_user:  cc       # change this user to what it is for the cloud
+  strategy: debug        # start a debugger on error
+  become: yes               # run as sudo
+  collections:               # import the plugin
+  - openstack.cloud
+  tasks:
+  - import_tasks: tasks/playbook_vm3.yml
 
 #- name: "Delete cloud VMS"
 #  hosts: MyLocalVMs     # specified in the MyInventory file
