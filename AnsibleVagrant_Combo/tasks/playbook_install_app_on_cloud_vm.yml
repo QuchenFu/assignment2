@@ -38,7 +38,7 @@
     - name: install kafka
       command: pip3 install kafka-python
 
-    - name: install kafka
+    - name: install couchDB
       command: pip3 install CouchDB
 
 ...

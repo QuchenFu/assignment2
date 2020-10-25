@@ -1,28 +1,28 @@
 ---
-#- name: "Create cloud VMS"
-#  hosts: MyLocalVMs     # specified in the MyInventory file
-#  tasks:
-#  - import_tasks: tasks/playbook_launch_vms.yml
+- name: "Create cloud VMS"
+  hosts: MyLocalVMs     # specified in the MyInventory file
+  tasks:
+  - import_tasks: tasks/playbook_launch_vms.yml
 
-#- name: "install packages"
-#  hosts: MyChameleonVMs       # specified in the MyInventory file
-#  remote_user:  cc       # change this user to what it is for the cloud
-#  strategy: debug        # start a debugger on error
-#  become: yes               # run as sudo
-#  collections:               # import the plugin
-#  - openstack.cloud
-#  tasks:
-#  - import_tasks: tasks/playbook_install_app_on_cloud_vm.yml
-#
-#- name: "run zookeeper and broker on vm2"
-#  hosts: VM2       # specified in the MyInventory file
-#  remote_user:  cc       # change this user to what it is for the cloud
-#  strategy: debug        # start a debugger on error
-#  become: yes               # run as sudo
-#  collections:               # import the plugin
-#  - openstack.cloud
-#  tasks:
-#  - import_tasks: tasks/playbook_vm2.yml
+- name: "install packages"
+  hosts: MyChameleonVMs       # specified in the MyInventory file
+  remote_user:  cc       # change this user to what it is for the cloud
+  strategy: debug        # start a debugger on error
+  become: yes               # run as sudo
+  collections:               # import the plugin
+  - openstack.cloud
+  tasks:
+  - import_tasks: tasks/playbook_install_app_on_cloud_vm.yml
+
+- name: "run zookeeper and broker on vm2"
+  hosts: VM2       # specified in the MyInventory file
+  remote_user:  cc       # change this user to what it is for the cloud
+  strategy: debug        # start a debugger on error
+  become: yes               # run as sudo
+  collections:               # import the plugin
+  - openstack.cloud
+  tasks:
+  - import_tasks: tasks/playbook_vm2.yml
 
 - name: "run broker on vm3"
   hosts: VM3       # specified in the MyInventory file

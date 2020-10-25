@@ -23,7 +23,7 @@ from kafka import KafkaConsumer  # consumer of events
 # acquire the consumer
 # (you will need to change this to your bootstrap server's IP addr)
 consumer= KafkaConsumer(bootstrap_servers="129.114.27.112:9092")
-couch = couchdb.Server('http://admin:19961009@localhost:5984')
+couch = couchdb.Server('http://admin:password@localhost:5984')
 
 # subscribe to topic
 consumer.subscribe(topics=["utilizations1","utilizations2"])

@@ -20,25 +20,13 @@
       shell: sudo apt update
 
     - name: install couchdb
-      shell: sudo apt install -y couchdb
+      shell: sudo snap install couchdb
 
-    - name: Install the couchDB
-      become: yes
-      shell: |
-        COUCHDB_PASSWORD={{ couchdb_admin_password }}
-        echo "couchdb couchdb/mode select clustered
-        couchdb couchdb/mode seen true
-        couchdb couchdb/nodename string {{ couchdb_node_name }}
-        couchdb couchdb/nodename seen true
-        couchdb couchdb/cookie string elmo
-        couchdb couchdb/cookie seen true
-        couchdb couchdb/bindaddress string 0.0.0.0
-        couchdb couchdb/bindaddress seen true
-        couchdb couchdb/adminpass password 19961009
-        couchdb couchdb/adminpass seen true
-        couchdb couchdb/adminpass_again password ${COUCHDB_PASSWORD}
-        couchdb couchdb/adminpass_again seen true" | sudo debconf-set-selections
-        DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --force-yes couchdb
+    - name: Set the couchDB password
+      shell: sudo snap set couchdb admin=password
+
+    - name: start couchDB
+      shell: sudo snap start couchdb
 
     - name: open ports
       shell: sudo ufw limit 2181; sudo ufw limit 9092; sudo ufw limit 5984
