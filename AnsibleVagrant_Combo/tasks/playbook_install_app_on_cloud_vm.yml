@@ -20,11 +20,14 @@
 #    - name: remove files
 #      command: sudo rm -r *
 
-    - name: download kafka
-      command: wget http://mirrors.advancedhosters.com/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+#    - name: download kafka
+#      command: wget http://mirrors.advancedhosters.com/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+#
+#    - name: extract kafka
+#      command: sudo tar xvf kafka_2.13-2.6.0.tgz
 
-    - name: extract kafka
-      command: sudo tar xvf kafka_2.13-2.6.0.tgz
+    - name: update
+      shell: sudo apt-get update
 
     - name: install pip
       command: sudo apt-get install -y python3-pip
@@ -40,6 +43,11 @@
 
     - name: install couchDB
       command: pip3 install CouchDB
+
+    - name: open ports
+      shell: sudo ufw limit 2181; sudo ufw limit 9092; sudo ufw limit 5984
+
+
 
 ...
 

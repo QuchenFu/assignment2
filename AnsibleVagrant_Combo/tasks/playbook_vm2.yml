@@ -1,16 +1,55 @@
 ---
-    - name: Copy server.properties
+    - name: Copy docker-compose.yml
       copy:
-        src: vm2/server.properties  # here you can give absolute path also.
-        dest: kafka_2.13-2.6.0/config/
+        src: vm2/docker-compose.yml
+        dest: docker-compose.yml
 
-    - name: open ports
-      shell: sudo ufw limit 2181; sudo ufw limit 9092; sudo ufw limit 5984
+    - name: install curl
+      shell: sudo apt install curl
 
-    - name: run zookeeper
-      shell: sudo nohup kafka_2.13-2.6.0/bin/zookeeper-server-start.sh kafka_2.13-2.6.0/config/zookeeper.properties &
+    - name: remove docker
+      shell: sudo apt-get remove docker docker-engine docker.io containerd runc
 
-    - name: run kafka
-      shell: sudo nohup kafka_2.13-2.6.0/bin/kafka-server-start.sh kafka_2.13-2.6.0/config/server.properties &
+    - name: update
+      shell: sudo apt-get update
+
+    - name: install docker dependency
+      shell: sudo apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+
+
+    - name: add docker key
+      shell: curl –fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+    - name: add docker package
+      shell: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+    - name: update
+      shell: sudo apt-get update
+
+    - name: install docker
+      shell: sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+    - name: add docker-compose
+      shell: sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+    - name: grant docker-compose acccess
+      shell: sudo chmod +x /usr/local/bin/docker-compose
+
+    - name: run zookeeper and 3 kafka
+      shell: sudo nohup docker-compose up &
+
+#    - name: Copy server.properties
+#      copy:
+#        src: vm2/server.properties  # here you can give absolute path also.
+#        dest: kafka_2.13-2.6.0/config/
+#
+#    - name: open ports
+#      shell: sudo ufw limit 2181; sudo ufw limit 9092; sudo ufw limit 5984
+#
+#    - name: run zookeeper
+#      shell: sudo nohup kafka_2.13-2.6.0/bin/zookeeper-server-start.sh kafka_2.13-2.6.0/config/zookeeper.properties &
+#
+#    - name: run kafka
+#      shell: sudo nohup kafka_2.13-2.6.0/bin/kafka-server-start.sh kafka_2.13-2.6.0/config/server.properties &
 
 ...

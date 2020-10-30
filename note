@@ -19,6 +19,42 @@ VboxManage dhcpserver modify --network="HostInterfaceNetworking-vboxnet0" --vm=v
 
 wget http://mirrors.advancedhosters.com/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
 
+sudo apt update
+
+sudo apt-get remove docker docker-engine docker.io containerd runc
+
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+curl –fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo docker pull wurstmeister/zookeeper
+
+sudo docker pull wurstmeister/kafka
+
+
+#which docker
+
+sudo apt install curl
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+
+sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+
+echo dump | nc localhost 2181 | grep brokers
+
 sudo apt-get install python3-pip
 
 sudo apt-get install default-jdk

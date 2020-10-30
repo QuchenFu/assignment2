@@ -1,11 +1,11 @@
 ---
-- name: "Create cloud VMS"
-  hosts: MyLocalVMs     # specified in the MyInventory file
-  tasks:
-  - import_tasks: tasks/playbook_launch_vms.yml
+#- name: "Create cloud VMS"
+#  hosts: MyLocalVMs     # specified in the MyInventory file
+#  tasks:
+#  - import_tasks: tasks/playbook_launch_vms.yml
 
 - name: "install packages"
-  hosts: MyChameleonVMs       # specified in the MyInventory file
+  hosts: MyChameleonVMs      # specified in the MyInventory file
   remote_user:  cc       # change this user to what it is for the cloud
   strategy: debug        # start a debugger on error
   become: yes               # run as sudo

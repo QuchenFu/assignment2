@@ -1,0 +1,61 @@
+version: '2'
+services:
+  kafka1:
+    image: wurstmeister/kafka
+    depends_on:
+      - zoo1
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_LOG_DIRS: /kafka
+      KAFKA_BROKER_ID: 1
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://129.114.26.55:9092
+#      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_HOST_NAME: 129.114.26.55
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_LOG_RETENTION_HOURS: "168"
+      KAFKA_LOG_RETENTION_BYTES: "100000000"
+      KAFKA_ZOOKEEPER_CONNECT:  zoo1:2181
+
+  kafka2:
+    image: wurstmeister/kafka
+    depends_on:
+      - zoo1
+    ports:
+      - "9093:9092"
+    environment:
+      KAFKA_LOG_DIRS: /kafka
+      KAFKA_BROKER_ID: 2
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://129.114.26.55:9092
+#      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_HOST_NAME: 129.114.26.55
+      KAFKA_ADVERTISED_PORT: 9093
+      KAFKA_LOG_RETENTION_HOURS: "168"
+      KAFKA_LOG_RETENTION_BYTES: "100000000"
+      KAFKA_ZOOKEEPER_CONNECT:  zoo1:2181
+
+  kafka3:
+    image: wurstmeister/kafka
+    depends_on:
+      - zoo1
+    ports:
+      - "9094:9092"
+    environment:
+      KAFKA_LOG_DIRS: /kafka
+      KAFKA_BROKER_ID: 3
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://129.114.26.55:9092
+#      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_HOST_NAME: 129.114.26.55
+      KAFKA_ADVERTISED_PORT: 9094
+      KAFKA_LOG_RETENTION_HOURS: "168"
+      KAFKA_LOG_RETENTION_BYTES: "100000000"
+      KAFKA_ZOOKEEPER_CONNECT:  zoo1:2181
+  zoo1:
+    image: elevy/zookeeper:latest
+    environment:
+      MYID: 1
+      SERVERS: zoo1
+    ports:
+      - "2181:2181"
+      - "2888"
+      - "3888"

@@ -22,8 +22,8 @@ from kafka import KafkaConsumer  # consumer of events
 
 # acquire the consumer
 # (you will need to change this to your bootstrap server's IP addr)
-consumer= KafkaConsumer(bootstrap_servers="129.114.27.112:9092")
-couch = couchdb.Server('http://admin:password@localhost:5984')
+consumer= KafkaConsumer(bootstrap_servers="129.114.26.55:9092")
+couch = couchdb.Server('http://admin:couchdb@localhost:5984')
 
 # subscribe to topic
 consumer.subscribe(topics=["utilizations1","utilizations2"])
@@ -37,6 +37,7 @@ except:
 # we keep reading and printing
 for msg in consumer:
 #    print("################first###############")
+    print(str(msg.value, 'ascii'))
     kkey = 'db'
     vvalue = (str(msg.value, 'ascii'))
     data = {kkey: vvalue}
